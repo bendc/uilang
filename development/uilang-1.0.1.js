@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
   while (i--) {
     var code = codeElements[i]
     var content = code.textContent.trim()
-
     if (content.lastIndexOf(delimiter, 0) === 0) {
       codeBlock = code
       codeBlockContent = content
