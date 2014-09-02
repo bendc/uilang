@@ -6,7 +6,7 @@
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"
 
-  var codeElements = document.querySelector('script[type="text/uilang"]')
+  var codeElements = document.querySelectorAll('script[type="text/uilang"]')
   var i = codeElements.length
   if (!i) {
     return
