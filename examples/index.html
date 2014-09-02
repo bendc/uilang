@@ -1,0 +1,389 @@
+<!doctype html>
+<meta charset=utf-8>
+<title>uilang</title>
+<link rel=stylesheet href="http://cloud.typography.com/6912452/772524/css/fonts.css">
+<link rel=stylesheet href="css/header.css">
+
+<header><div class=preload>
+  <section id=intro>
+    <h1>uilang</h1>
+    <p><em>a minimal, <abbr title="User Interface">ui</abbr>-focused programming language for web designers</em></p>
+    <section id=intro-example>
+      <pre>clicking on "<strong>.try-it</strong>" toggles class "<strong>hidden</strong>" on "<strong>.info-box</strong>"</pre>
+      <a href="index.html" class=try-it>Try It</a>
+    </section>
+  </section>
+
+  <section id=getting-started class=info-box><div>
+    <h1>Getting Started</h1>
+    <p>Insert uilang.js in your page, write some uilang as shown above in a simple <code>&lt;script type="text/uilang"></code> element and use <abbr title="Cascading Style Sheets">CSS</abbr> to show, hide and animate things.</p>
+    <a href="lib/production/uilang.js" download>
+      Download
+      <span>1<abbr title=Kilobyte>KB</abbr></span>
+    </a>
+  </div></section>
+
+  <section id=build-interfaces class=info-box><div>
+    <h1>Build Interfaces</h1>
+    <p>Create popovers, tabs, galleries, overlays and more using a language specifically designed for this. No programming experience is required.</p>
+    <a href="index.html#examples">Examples</a>
+  </div></section>
+</div></header>
+
+<script src="js/header.js"></script>
+<script src="js/highlight.js"></script>
+<script src="js/main.js"></script>
+
+<ol id=examples>
+  <li>
+    <em>Example</em>
+    <h1>Simple notification banner</h1>
+    <p>The principle is straightforward: when Hide is clicked, we add a <code>hidden</code> class to the banner. We can then set this class to <code>opacity:0</code> in our CSS.</p>
+    <section class=showcase>
+      <section class=preview>
+        <div id=notification>
+          <p>You have 3 unread messages.</p>
+          <button class=hide>Hide</button>
+        </div>
+      </section>
+      <section class=code>
+<pre><code>&lt;!doctype html>
+&lt;title>Example&lt;/title>
+&lt;script src=uilang.js>&lt;/script>
+
+&lt;style>
+  /* Font styles, colors, etc. omitted for clarity */
+  #notification {
+    transition: .8s
+  }
+  #notification.hidden {
+    opacity: 0
+  }
+&lt;/style>
+
+&lt;div id=notification>
+  &lt;p>You have 3 unread messages.&lt;/p>
+  &lt;button class=hide>Hide&lt;/button>
+&lt;/div>
+
+&lt;script type="text/uilang">
+  clicking on ".hide" adds class "hidden" on "#notification"
+&lt;/script></code></pre>
+      </section>
+    </section>
+    <a href="examples/notification.zip">Download example</a>
+  </li>
+  <li>
+    <em>Example</em>
+    <h1>Animated switch</h1>
+    <p>Instead of adding a class, we’ll now use uilang’s <code>toggle class</code> to switch between the active and inactive state when the control is clicked.</p>
+    <section class=showcase>
+      <section class=preview>
+        <div id=switch>
+          <div id=circle></div>
+        </div>
+      </section>
+      <section class=code>
+<pre><code>&lt;!doctype html>
+&lt;title>Example&lt;/title>
+&lt;script src=uilang.js>&lt;/script>
+
+&lt;style>
+  #switch, #circle {
+    transition: .4s
+  }
+  #switch {
+    background: #FAFAFB /* gray */
+  }
+  #switch.active {
+    background: #52D468 /* green */
+  }
+  #circle {
+    width: 50%
+  }
+  #switch.active #circle {
+    transform: translateX(100%)
+  }
+&lt;/style>
+
+&lt;div id=switch>
+  &lt;div id=circle>&lt;/div>
+&lt;/div>
+
+&lt;script type="text/uilang">
+  clicking on "#switch" toggles class "active" on "#switch"
+&lt;/script></code></pre>
+      </section>
+    </section>
+    <a href="examples/switch.zip">Download example</a>
+  </li>
+  <li>
+    <em>Example</em>
+    <h1>Navigation popover</h1>
+    <p>Same principle as the previous example: when More is clicked, we fade the popover in and out by simply toggling a CSS class on it.</p>
+    <section class=showcase>
+      <section class=preview>
+        <ul id=nav>
+          <li><a href="index.html#">Home</a>
+          <li><a href="index.html#">Services</a>
+          <li><a href="index.html#">Portfolio</a>
+          <li>
+            <a href="index.html#" class=more>More</a>
+            <ul id=popover>
+              <li><a href="index.html#">About</a>
+              <li><a href="index.html#">Blog</a>
+              <li><a href="index.html#">Contact</a>
+            </ul>
+        </ul>
+      </section>
+      <section class=code>
+<pre><code>&lt;!doctype html>
+&lt;title>Example&lt;/title>
+&lt;script src=uilang.js>&lt;/script>
+
+&lt;style>
+  #popover {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(.8) translateY(-30%);
+    transition: .4s cubic-bezier(.3, 0, 0, 1.3)
+  }
+  #popover.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none
+  }
+&lt;/style>
+
+&lt;ul id=nav>
+  &lt;li>&lt;a href=#>Home&lt;/a>
+  &lt;li>&lt;a href=#>Services&lt;/a>
+  &lt;li>&lt;a href=#>Portfolio&lt;/a>
+  &lt;li>
+    &lt;a href=# class=more>More&lt;/a>
+    &lt;ul id=popover>
+      &lt;li>&lt;a href=#>About&lt;/a>
+      &lt;li>&lt;a href=#>Blog&lt;/a>
+      &lt;li>&lt;a href=#>Contact&lt;/a>
+    &lt;/ul>
+&lt;/ul>
+
+&lt;script type="text/uilang">
+  clicking on ".more" toggles class "visible" on "#popover"
+&lt;/script></code></pre>
+      </section>
+    </section>
+    <a href="examples/popover.zip">Download example</a>
+  </li>
+  <li>
+    <em>Example</em>
+    <h1>Tabs</h1>
+    <p>This example introduces the <code>target</code> keyword which matches the clicked element. We’ll then use the CSS adjacent selector to select the content.</p>
+    <section class=showcase>
+      <section class=preview>
+        <h1 class=active>About me</h1>
+        <p>Hi! My name’s Ben, I’m a 30-year old interface designer.</p>
+        <h1>Work</h1>
+        <p>You can see some of my recent work on <a href=http://dribbble.com/bdc>Dribbble</a>.</p>
+        <h1>Contact</h1>
+        <p>Feel free to send me <a href=mailto:ben@deaxon.com>an email</a> or ping me on <a href=http://twitter.com/bdc>Twitter</a>!</p>
+      </section>
+      <section class=code>
+<pre><code>&lt;!doctype html>
+&lt;title>Example&lt;/title>
+&lt;script src=uilang.js>&lt;/script>
+
+&lt;style>
+  h1 {
+    background: #FAFAFB
+  }
+  h1.active {
+    background: white
+  }
+  p {
+    display: none
+  }
+  h1.active + p {
+    display: block
+  }
+&lt;/style>
+
+&lt;h1 class=active>About me&lt;/h1>
+&lt;p>Hi! My name’s Ben, I’m a 30-year old interface designer.
+
+&lt;h1>Work&lt;/h1>
+&lt;p>You can see some of my recent work on Dribbble.
+
+&lt;h1>Contact&lt;/h1>
+&lt;p>Feel free to send me an email or ping me on Twitter!
+
+&lt;script type="text/uilang">
+  &lt;!-- start by removing the previous "open" class -->
+  clicking on "h1" removes class "active" on "h1.active"
+
+  &lt;!-- then add it to the clicked title -->
+  clicking on "h1" adds class "active" on "target"
+&lt;/script></code></pre>
+      </section>
+    </section>
+    <a href="examples/tabs.zip">Download example</a>
+  </li>
+  <li>
+    <em>Example</em>
+    <h1>Accordion</h1>
+    <p>Exactly the same logic as with the tabs: set an <code>open</code> class to the clicked element, use this class in CSS to style that element and its siblings.</p>
+    <section class=showcase>
+      <section class=preview>
+        <h1 class=open>About me</h1>
+        <p>Hi! My name’s Ben, I’m a 30-year old interface designer.
+        <h1>Work</h1>
+        <p>You can see some of my recent work on <a href=http://dribbble.com/bdc>Dribbble</a>.
+        <h1>Contact</h1>
+        <p>Feel free to send me <a href=mailto:ben@deaxon.com>an email</a> or ping me on <a href=http://twitter.com/bdc>Twitter</a>!
+      </section>
+      <section class=code>
+<pre><code>&lt;!doctype html>
+&lt;title>Example&lt;/title>
+&lt;script src=uilang.js>&lt;/script>
+
+&lt;style>
+  h1, h1::before, p {
+    transition: .4s
+  }
+  h1 {
+    cursor: pointer
+  }
+  h1::before {
+    background: url(blue-arrow.svg);
+    transform: rotate(-90deg)
+  }
+  h1.open::before {
+    transform: none
+  }
+  h1.open ~ h1 {
+    /* slide down all the h1 following the open one */
+    transform: translateY(24px)
+  }
+  p {
+    opacity: 0;
+    pointer-events: none
+  }
+  h1.open + p {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(8px)
+  }
+&lt;/style>
+
+&lt;h1 class=open>About me&lt;/h1>
+&lt;p>Hi! My name’s Ben, I’m a 30-year old interface designer.
+
+&lt;h1>Work&lt;/h1>
+&lt;p>You can see some of my recent work on Dribbble.
+
+&lt;h1>Contact&lt;/h1>
+&lt;p>Feel free to send me an email or ping me on Twitter!
+
+&lt;script type="text/uilang">
+  clicking on "h1" removes class "open" on "h1.open"
+  clicking on "h1" adds class "open" on "target"
+&lt;/script></code></pre>
+      </section>
+    </section>
+    <a href="examples/accordion.zip">Download example</a>
+  </li>
+  <li>
+    <em>Example</em>
+    <h1>Overlay</h1>
+    <p>Add a <code>visible</code> class to the overlay when RSVP is clicked, remove that class when close or confirm is clicked. The rest is good ol’ CSS.</p>
+    <section class=showcase>
+      <section class=preview>
+        <p>Design Meetup. <button class=rsvp>RSVP</button>
+        <div id=overlay>
+          <div id=registration>
+            <a href="index.html#" class=close>Close</a>
+            <h1>Design Meetup</h1>
+            <input placeholder=Name>
+            <input placeholder=Email type=email>
+            <a href="index.html#" class=confirm>Confirm</a>
+          </div>
+        </div>
+      </section>
+      <section class=code>
+<pre><code>&lt;!doctype html>
+&lt;title>Example&lt;/title>
+&lt;script src=uilang.js>&lt;/script>
+
+&lt;style>
+  #overlay, #registration {
+    opacity: 0;
+    transition: .5s
+  }
+  #overlay {
+    pointer-events: none
+  }
+  #overlay.open {
+    opacity: 1;
+    pointer-events: auto
+  }
+  #registration {
+    transform: translateY(80%) scale(.8);
+    transition-timing-function: cubic-bezier(.3, 0, 0, 1.3);
+    transition-delay: .4s
+  }
+  #overlay.open #registration {
+    opacity: 1;
+    transform: none
+  }
+&lt;/style>
+
+&lt;p>Design Meetup. &lt;button class=rsvp>RSVP&lt;/button>
+
+&lt;div id=overlay>
+  &lt;div id=registration>
+    &lt;a href=# class=close>Close&lt;/a>
+    &lt;h1>Design Meetup&lt;/h1>
+    &lt;input placeholder=Name>
+    &lt;input placeholder=Email type=email>
+    &lt;a href=# class=confirm>Confirm&lt;/a>
+  &lt;/div>
+&lt;/div>
+
+&lt;script type="text/uilang">
+  clicking on ".rsvp" adds class "open" on "#overlay"
+  clicking on ".close, .confirm" removes class "open" on "#overlay"
+&lt;/script></code></pre>
+      </section>
+    </section>
+    <a href="examples/overlay.zip">Download example</a>
+  </li>
+</ol>
+
+<section id=faq>
+  <h1>Frequently asked questions</h1>
+  <dl>
+    <dt>What is uilang good for?</dt>
+    <dd>Creating custom user interface components, adding some interactivity to your site, building prototypes—the possibilities provided by uilang’s simple class manipulation logic are endless. You can read more about the philosophy behind uilang in <a href=https://medium.com/@bdc/the-educational-side-of-uilang-92d39da94c13>this article on Medium</a>.</dd>
+    <dt>Does uilang support other events?</dt>
+    <dd>No, uilang lets you only react to clicks. Hover effects can usually be achieved in CSS and other events are simply out of the scope of this language. By keeping its feature set light and focused, uilang aims to lower the barriers to entry into programming.</dd>
+    <dt>Where should I insert the code?</dt>
+    <dd>uilang.js can be inserted anywhere, but it’s recommended to have the <code>code</code> element containing your uilang code at the very end of the page, just before the closing <code>body</code> tag. Don’t worry about having other <code>code</code> elements on the page, the script will only execute the uilang one.</dd>
+    <dt>Can I use uilang in production?</dt>
+    <dd>Yes, uilang is fast, multi-platform and extremely lightweight. It doesn’t have any external dependencies and plays nicely with JavaScript. That means a designer can, for example, code UI effects and behaviors with uilang and let developers implement the logic in JavaScript.</dd>
+  </dl>
+</section>
+
+<script src="../development/uilang.js"></script>
+
+<script type="text/uilang">
+  clicking on ".try-it" toggles class "hidden" on ".info-box"
+  clicking on ".hide" adds class "hidden" on "#notification"
+  clicking on "#switch" toggles class "active" on "#switch"
+  clicking on ".more" toggles class "visible" on "#popover"
+  clicking on "#examples li:nth-child(4) .preview h1" removes class "active" on "h1.active"
+  clicking on "#examples li:nth-child(4) .preview h1" adds class "active" on "target"
+  clicking on "#examples li:nth-child(5) .preview h1" removes class "open" on "h1.open"
+  clicking on "#examples li:nth-child(5) .preview h1" adds class "open" on "target"
+  clicking on ".rsvp" adds class "open" on "#overlay"
+  clicking on ".close, .confirm" removes class "open" on "#overlay"
+</script>
