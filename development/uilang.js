@@ -5,61 +5,70 @@
 
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"
-
-  var codeElements = document.querySelectorAll('script[type="text/uilang"]')
-  var i = codeElements.length
-  if (!i) {
-    return
+  
+  var events = { 
+    'click': 'click', 
+    'context menu': 'contextmenu',
+    'double click': 'dblclick',
+    'mouse down': 'mousedown',
+    'mouse up': 'mouseup',
+    'mouse enter': 'mouseenter',
+    'mouse leave': 'mouseleave',
+    'mouse over': 'mouseover',
+    'mouse out': 'mouseout',
+    'input blur': 'blur',
+    'input change': 'change',
+    'input focus': 'focus',
+    'form reset': 'reset',
+    'form submit': 'submit'
   }
-  var delimiter = "clicking on"
-  var codeBlockContent = ""
+  var classActions = [ 'add', 'remove', 'toggle' ]
+  var instructionRegex = new RegExp('on\\s+(' + 
+    Object.keys(events).join('|') +
+  ')\\s+on\\s*"(.*)"\\s*(' +
+    classActions.join('|')
+  +')s?\\s+class\\s*"\\.?([^"]*)"\\s*on\\s*"([^"]*)"')
+  
+  var scriptElements = document.querySelectorAll('script[type="text/uilang"]')
+  var scriptContent = Array.prototype.slice.call(scriptElements).map(function(el){ return el.textContent.split('\n') })
+  var lines = []
+  lines = lines.concat.apply(lines, scriptContent)
+  
+  lines.forEach(function(instruction) {
+    instruction = instruction.trim()
+    if (!instruction) return
+    instruction = instruction.replace(/^clicking on/,'on click on') //Supporting old version
+    var matches = instruction.match(instructionRegex)
+    if (!matches) throw new Error("Invalid line \"" + instruction + "\"" )
 
-  while (i--) {
-    var code = codeElements[i]
-    var content = code.textContent.trim()
-    codeBlockContent += content+"\n";
-  }
+    var data = {
+      eventType: matches[1],
+      listenerSelector: matches[2],
+      classBehavior: matches[3],
+      classValue: matches[4],
+      targetSelector: matches[5]
+    }
+    createEventListener(data)
+  })
 
-  function InstructionParsing(instruction) {
-    var separator = instruction.charAt(0)
-    var instructionSplit = instruction.split(separator)
-
-    this.clickSelector = instructionSplit[1]
-    this.classBehavior = instructionSplit[2].trim().split(" ")[0]
-    this.classValue = instructionSplit[3]
-    this.targetSelector = instructionSplit[5]
-  }
-
-  function UIElement(clickSelector, classBehavior, classValue, targetSelector) {
-    this.clickSelector = clickSelector
-    this.classBehavior = classBehavior.charAt(classBehavior.length-1) == "s"
-                       ? classBehavior.substring(0, classBehavior.length-1)
-                       : classBehavior
-    this.classValue = classValue.charAt(0) == "."
-                    ? classValue.substring(1, classValue.length)
-                    : classValue
-    this.targetSelector = targetSelector
-    this.createEventListener()
-  }
-
-  UIElement.prototype.createEventListener = function() {
-    var self = this
-    var clicked = document.querySelectorAll(self.clickSelector)
-    var i = clicked.length
+  function createEventListener(self) {
+    var listeners = document.querySelectorAll(self.listenerSelector)
+    var i = listeners.length
 
     if (i < 1) {
-      throw new Error("There's no element matching your \"" + self.clickSelector + "\" CSS selector.")
+      throw new Error("There's no element matching your \"" + self.listenerSelector + "\" CSS selector.")
     }
 
     while (i--) {
-      clicked.item(i).addEventListener("click", clickCallback)
+      console.log(events[self.eventType], self.eventType);
+      listeners.item(i).addEventListener(events[self.eventType], callback)
     }
 
     function updateClass(el) {
       el.classList[self.classBehavior](self.classValue)
     }
 
-    function clickCallback(e) {
+    function callback(e) {
       switch (self.targetSelector) {
         case "target" :
         case "this"   :
@@ -80,15 +89,4 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
   }
-
-  codeBlockContent.split(delimiter).forEach(function(data) {
-    if (!data) return
-    var params = new InstructionParsing(data.trim())
-    new UIElement(
-      params.clickSelector,
-      params.classBehavior,
-      params.classValue,
-      params.targetSelector
-    )
-  })
 })

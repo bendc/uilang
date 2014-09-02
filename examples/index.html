@@ -9,7 +9,7 @@
     <h1>uilang</h1>
     <p><em>a minimal, <abbr title="User Interface">ui</abbr>-focused programming language for web designers</em></p>
     <section id=intro-example>
-      <pre>clicking on "<strong>.try-it</strong>" toggles class "<strong>hidden</strong>" on "<strong>.info-box</strong>"</pre>
+      <pre>on click on "<strong>.try-it</strong>" toggles class "<strong>hidden</strong>" on "<strong>.info-box</strong>"</pre>
       <a href="index.html" class=try-it>Try It</a>
     </section>
   </section>
@@ -67,7 +67,7 @@
 &lt;/div>
 
 &lt;script type="text/uilang">
-  clicking on ".hide" adds class "hidden" on "#notification"
+  on click on ".hide" adds class "hidden" on "#notification"
 &lt;/script></code></pre>
       </section>
     </section>
@@ -111,7 +111,7 @@
 &lt;/div>
 
 &lt;script type="text/uilang">
-  clicking on "#switch" toggles class "active" on "#switch"
+  on click on "#switch" toggles class "active" on "#switch"
 &lt;/script></code></pre>
       </section>
     </section>
@@ -169,7 +169,8 @@
 &lt;/ul>
 
 &lt;script type="text/uilang">
-  clicking on ".more" toggles class "visible" on "#popover"
+  on mouse enter on ".more" toggles class "visible" on "#popover"
+  on mouse leave on "#popover" toggles class "visible" on "#popover"
 &lt;/script></code></pre>
       </section>
     </section>
@@ -219,10 +220,10 @@
 
 &lt;script type="text/uilang">
   &lt;!-- start by removing the previous "open" class -->
-  clicking on "h1" removes class "active" on "h1.active"
+  on click on "h1" removes class "active" on "h1.active"
 
   &lt;!-- then add it to the clicked title -->
-  clicking on "h1" adds class "active" on "target"
+  on click on "h1" adds class "active" on "target"
 &lt;/script></code></pre>
       </section>
     </section>
@@ -285,8 +286,8 @@
 &lt;p>Feel free to send me an email or ping me on Twitter!
 
 &lt;script type="text/uilang">
-  clicking on "h1" removes class "open" on "h1.open"
-  clicking on "h1" adds class "open" on "target"
+  on click on "h1" removes class "open" on "h1.open"
+  on click on "h1" adds class "open" on "target"
 &lt;/script></code></pre>
       </section>
     </section>
@@ -350,8 +351,8 @@
 &lt;/div>
 
 &lt;script type="text/uilang">
-  clicking on ".rsvp" adds class "open" on "#overlay"
-  clicking on ".close, .confirm" removes class "open" on "#overlay"
+  on click on ".rsvp" adds class "open" on "#overlay"
+  on click on ".close, .confirm" removes class "open" on "#overlay"
 &lt;/script></code></pre>
       </section>
     </section>
@@ -376,14 +377,27 @@
 <script src="../development/uilang.js"></script>
 
 <script type="text/uilang">
-  clicking on ".try-it" toggles class "hidden" on ".info-box"
-  clicking on ".hide" adds class "hidden" on "#notification"
-  clicking on "#switch" toggles class "active" on "#switch"
-  clicking on ".more" toggles class "visible" on "#popover"
-  clicking on "#examples li:nth-child(4) .preview h1" removes class "active" on "h1.active"
-  clicking on "#examples li:nth-child(4) .preview h1" adds class "active" on "target"
-  clicking on "#examples li:nth-child(5) .preview h1" removes class "open" on "h1.open"
-  clicking on "#examples li:nth-child(5) .preview h1" adds class "open" on "target"
-  clicking on ".rsvp" adds class "open" on "#overlay"
-  clicking on ".close, .confirm" removes class "open" on "#overlay"
+  on click on ".try-it" toggles class "hidden" on ".info-box"
+</script>
+<script type="text/uilang">
+  on click on ".hide" adds class "hidden" on "#notification"
+</script>
+<script type="text/uilang">
+  on click on "#switch" toggles class "active" on "#switch"
+</script>  
+<script type="text/uilang">
+  on mouse enter on ".more" toggles class "visible" on "#popover"
+  on mouse leave on "#popover" toggles class "visible" on "#popover"
+</script>
+<script type="text/uilang">
+  on click on "#examples li:nth-child(4) .preview h1" removes class "active" on "h1.active"
+  on click on "#examples li:nth-child(4) .preview h1" adds class "active" on "target"
+</script>
+<script type="text/uilang">  
+  on click on "#examples li:nth-child(5) .preview h1" removes class "open" on "h1.open"
+  on click on "#examples li:nth-child(5) .preview h1" adds class "open" on "target"
+</script>  
+<script type="text/uilang">
+  on click on ".rsvp" adds class "open" on "#overlay"
+  on click on ".close, .confirm" removes class "open" on "#overlay"
 </script>
