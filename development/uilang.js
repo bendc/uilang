@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     while (i--) {
-      console.log(events[self.eventType], self.eventType);
       listeners.item(i).addEventListener(events[self.eventType], callback)
     }
 
