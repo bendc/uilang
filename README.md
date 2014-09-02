@@ -1,6 +1,6 @@
 # uilang
 
-uilang is a dead simple programming language for web designers. With uilang, you write your code just like plain English, straight into your HTML using a `<code>` element. uilang's logic relies on manipulating classes on HTML elements and using these classes in CSS to show, hide, animate and transform elements when a click occurs. This simple logic lets designers create most of the typical user interface behaviours: tabs, popovers, overlays, sliding menus, etc.
+uilang is a dead simple programming language for web designers. With uilang, you write your code just like plain English, straight into your HTML using a `<script>` element. uilang's logic relies on manipulating classes on HTML elements and using these classes in CSS to show, hide, animate and transform elements when a click occurs. This simple logic lets designers create most of the typical user interface behaviours: tabs, popovers, overlays, sliding menus, etc.
 
 ## Getting started
 
@@ -9,12 +9,12 @@ The first thing to do is to include `uilang.js` on your page. [Download](http://
 ```html
 <script src=uilang.js></script>
 ```
-You're now ready to write some uilang. Your code should be inserted in a `<code>` element, preferably at the very end of your page (just before `</body>`). The syntax looks like this:
+You're now ready to write some uilang. Your code should be inserted in a `<script>` element with a `type` attribute, anywhere in the page. The syntax looks like this:
 
 ```html
-<code>
+<script type="text/uilang">
   clicking on ".hide" adds class "hidden" on "div"
-</code>
+</script>
 ```
 This is pretty much the only syntax you'll have to learn. This code is straightforward: when you click on an element with a `hide` class, a `hidden` class will be added to every `div`.
 
@@ -33,25 +33,27 @@ div.hidden {
 Let's deconstruct the syntax from our previous example:
 
 ```html
-<code>
+<script type="text/uilang">
   clicking on ".hide"(1) adds(2) class "hidden"(3) on "div"(4)
-</code>
+</script>
 ```
 1. Any CSS selector.
 2. `adds`, `removes` or `toggles`.
 3. Any class name.
 4. Any CSS selector or the `target` keyword (which selects the clicked element).
 
-You can add as many instructions as you want into your `<code>` element:
+You can add as many instructions as you want into your `<script>` element (and many `<script>` element as you want):
 
 ```html
-<code>
+<script type="text/uilang">
   clicking on ".hide" adds class "hidden" on "div"
   clicking on "nav .tabs" adds class "active" on "target"
+</script>
+....
+<script type="text/uilang">
   clicking on "img:first-child" toggles class "big" on "target"
-</code>
+</script>
 ```
-Don't worry about having other `<code>` elements on your page, uilang will only execute the one containing your uilang code.
 
 Please note that uilang only supports click events. Hover effects can usually be achieved in CSS and other events are simply out of the scope of this language. By keeping its feature set light and focused, uilang aims to lower the barriers to entry into programming.
 
@@ -60,13 +62,13 @@ Please note that uilang only supports click events. Hover effects can usually be
 Keep in mind uilang is basically just HTML, which means that you're already familiar with the syntax for comments:
 
 ```html
-<code>
+<script type="text/uilang">
   <!-- I'm a comment. -->
   clicking on ".hide" adds class "hidden" on "div"
 
   <!-- I'm also a comment! -->
   clicking on "nav .tabs" adds class "active" on "target"
-</code>
+</script>
 ```
 
 ## Examples
