@@ -73,6 +73,9 @@ document.addEventListener("DOMContentLoaded", function() {
         case undefined:
           updateClass(e.target)
           break
+        case "parent" :
+          updateClass(e.target.parentNode)
+          break
         default:
           var target = document.querySelectorAll(self.targetSelector)
           var i = target.length
