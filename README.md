@@ -75,5 +75,6 @@ Keep in mind uilang is basically just HTML, which means that you're already fami
 * [Hamburger menu](http://demos.uilang.com/hamburger-menu/)
 * [Looping Keynote-like presentation](http://demos.uilang.com/keynote/)
 * [Sliding panels](http://demos.uilang.com/sliding-panels/)
+* [Apple-like explore menu](http://demos.uilang.com/explore-menu/)
 
 You'll find more examples on [uilang.com](http://uilang.com).
