@@ -1,0 +1,23 @@
+{
+  "name": "uilang",
+  "version": "1.0.1",
+  "homepage": "http://uilang.com",
+  "authors": [
+    "Benjamin De Cock <ben@deaxon.com>"
+  ],
+  "description": "uilang is a dead simple programming language for web designers.",
+  "main": "development/uilang-1.0.1.js",
+  "keywords": [
+    "ui",
+    "css",
+    "language"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
