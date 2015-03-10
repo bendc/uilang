@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateClass(el) {
-      if (!'classList' in document.documentElement) {
+      if ('classList' in document.documentElement) {
         el.classList[self.classBehavior](self.classValue)
       } else {
 
