@@ -47,6 +47,22 @@ document.addEventListener("DOMContentLoaded", function() {
     this.createEventListener()
   }
 
+  function hasClass(el, classValue) {
+    return new RegExp('(^|\\s)' + classValue + '(\\s|$)').test(el.className);
+  }
+
+  function addClass(el, classValue) {
+    if (!hasClass(el, classValue)) {
+      el.className += (el.className ? ' ' : '') + classValue;
+    }
+  }
+
+  function removeClass(el, classValue) {
+    if (hasClass(el, classValue)) {
+      el.className = el.className.replace(new RegExp('(^|\\s)*' + classValue + '(\\s|$)*', 'g'), '');
+    }
+  }
+
   UIElement.prototype.createEventListener = function() {
     var self = this
     var clicked = document.querySelectorAll(self.clickSelector)
@@ -61,7 +77,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateClass(el) {
-      el.classList[self.classBehavior](self.classValue)
+      if (!'classList' in document.documentElement) {
+        el.classList[self.classBehavior](self.classValue)
+      } else {
+
+        switch (self.classBehavior) {
+          case "add":
+            addClass(el, self.classValue);
+            break;
+          case "remove":
+            removeClass(el, self.classValue);
+            break;
+          case "toggle":
+            (hasClass(el, self.classValue) ? removeClass : addClass)(el, self.classValue);
+            break;
+        }
+      }
     }
 
     function clickCallback(e) {
