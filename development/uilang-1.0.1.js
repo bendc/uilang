@@ -6,24 +6,19 @@
 document.addEventListener("DOMContentLoaded", function() {
   "use strict"
 
-  var codeElements = document.getElementsByTagName("code")
+  var codeElements = document.querySelectorAll('script[type="text/uilang"]')
   var i = codeElements.length
+  if (!i) {
+    return
+  }
   var delimiter = "clicking on"
-  var codeBlock
-  var codeBlockContent
+  var codeBlockContent = ""
 
   while (i--) {
     var code = codeElements[i]
     var content = code.textContent.trim()
-    if (content.lastIndexOf(delimiter, 0) === 0) {
-      codeBlock = code
-      codeBlockContent = content
-      break
-    }
+    codeBlockContent += content+"\n";
   }
-
-  if (!codeBlock) return
-  codeBlock.parentNode.removeChild(codeBlock)
 
   function InstructionParsing(instruction) {
     var separator = instruction.charAt(0)
