@@ -4,7 +4,7 @@ uilang is a dead simple programming language for web designers. With uilang, you
 
 ## Getting started
 
-The first thing to do is to include `uilang.js` on your page. [Download](http://uilang.com/lib/production/uilang.js) the minified version (1KB) and insert it anywhere in your HTML:
+The first thing to do is to include `uilang.js` on your page. [Download](https://github.com/bendc/uilang/blob/master/production/uilang.js) the minified version (1KB) and insert it anywhere in your HTML:
 
 ```html
 <script src=uilang.js></script>
@@ -68,13 +68,3 @@ Keep in mind uilang is basically just HTML, which means that you're already fami
   clicking on "nav .tabs" adds class "active" on "target"
 </code>
 ```
-
-## Examples
-
-* [Simple gallery](http://demos.uilang.com/gallery/)
-* [Hamburger menu](http://demos.uilang.com/hamburger-menu/)
-* [Looping Keynote-like presentation](http://demos.uilang.com/keynote/)
-* [Sliding panels](http://demos.uilang.com/sliding-panels/)
-* [Apple-like explore menu](http://demos.uilang.com/explore-menu/)
-
-You'll find more examples on [uilang.com](http://uilang.com).
